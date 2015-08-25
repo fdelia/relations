@@ -1,3 +1,5 @@
+// This file needs to have global scope
+
 Persons = new Mongo.Collection('Persons');
 Processes = new Mongo.Collection('Processes');
 Ressources = new Mongo.Collection('Ressources');

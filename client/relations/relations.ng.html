@@ -17,11 +17,11 @@
 	</div>
 
 	<div class="box-body">
-		<form class="form-inline" role="" ng-submit="">
+		<form class="form-inline" role="" ng-submit="addRelation(person, process, ressource)">
 	        <div class="form-group">
-	          <input type="person" class="form-control" placeholder="Person">
-	          <input type="process" class="form-control" placeholder="processes">
-	          <input type="ressource" class="form-control" placeholder="ressource">
+	          <input type="person" class="form-control" placeholder="Person" ng-model="person">
+	          <input type="process" class="form-control" placeholder="processes" ng-model="process">
+	          <input type="ressource" class="form-control" placeholder="ressource" ng-model="ressource">
 	        </div>
 	        <button type="submit" class="btn btn-default">Add</button>
 	    </form>
@@ -48,7 +48,7 @@
 
 	<div class="box-body">
 		<ul>
-			<li ng-repeat="rel in relations">{{ rel }}</li>
+			<li ng-repeat="rel in relations">{{ rel.person.name }} {{ rel.process.name }} {{ rel.ressource.name }} <small class="text-muted">{{ rel.createdAt }}</small></li>
 		</ul>
 	</div>
 </div>
