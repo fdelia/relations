@@ -1,4 +1,4 @@
-<div class="box box-info">
+<div class="box box-info" ng-controller="AddRelationCtrl">
 	<div class="box-header">
 		<div class="box-title">New relation</div>
 
@@ -28,7 +28,9 @@
 	</div>
 </div>
 
-<div class="box box-warning">
+
+
+<div class="box box-warning" ng-controller="RelationListCtrl">
 	<div class="box-header">
 		<div class="box-title">Relations</div>
 
@@ -47,12 +49,12 @@
 	</div>
 
 	<div class="box-body">
-		<ul>
-			<li ng-repeat="rel in relations">
+		<ul class="list-group simple-links-list">
+			<li ng-repeat="rel in relations" class="list-group-item">
 				<a ui-sref="person({id: rel.person.name})">{{ rel.person.name }}</a>
 				{{ rel.process.name }} 
 				{{ rel.ressource.name }} 
-				<small class="text-muted">{{ rel.createdAt }}</small>
+				<small class="text-muted">{{ timeSince(rel.createdAt) }}</small>
 			</li>
 		</ul>
 	</div>

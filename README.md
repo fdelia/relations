@@ -1,10 +1,16 @@
 # Relations :smirk:
 
-TODO: Write a project description
+Work in progress.
+Kind of a very small ERM (environmental resource management). The user adds processes (x does y) and the software then displays relations and asks questions about them.
 
 ## Installation
 
-TODO: Describe the installation process
+* install meteorJs
+* download
+* unzip
+* cd into folder
+* open terminal, type `meteor`
+* go to [http://localhost:3000](http://localhost:3000)
 
 ## Usage
 
@@ -21,10 +27,12 @@ TODO: Write usage instructions
 ## History
 
 TODO: Write history
+Done: [They were faster than me](https://en.wikipedia.org/wiki/History_of_the_world)
 
 ## Credits
 
-TODO: Write credits
+All to myself. Except...
+Frameworks used: AngularJs, MeteorJs, Bootstrap, UnderscoreJs, JQuery.
 
 ## License
 

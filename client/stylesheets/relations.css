@@ -4,3 +4,14 @@
 .navbar {
 	margin: 0;
 }
+
+.simple-links-list > li > a {
+	color: black;
+} 
+.simple-links-list > li > a:hover {
+	text-decoration: none;
+}
+
+.simple-links-list > li:hover {
+	background-color: #def;
+}

@@ -8,7 +8,7 @@
         .state('relations', {
           url: '/',
           templateUrl: 'client/relations/relations.ng.html',
-          controller: 'RelationsCtrl',
+          // controller: 'RelationsCtrl',
           resolve: {
             promiseObj: ['$meteor', '$q', function($meteor, $q) {
               var def = $q.defer();
@@ -31,7 +31,25 @@
         .state('person', {
           url: '/person/:id',
           templateUrl: 'client/persons/persons.ng.html',
-          controller: 'PersonCtrl'
+          // controller: 'PersonsCtrl',
+          resolve: {
+            promiseObj: ['$meteor', '$q', function($meteor, $q) {
+              var def = $q.defer();
+
+              // TODO put this into a data service
+              $meteor.subscribe('Relations').then(function() {
+                $meteor.subscribe('Persons').then(function() {
+                  $meteor.subscribe('Processes').then(function() {
+                    $meteor.subscribe('Ressources').then(function() {
+                      def.resolve('ok');
+                    });
+                  });
+                });
+              });
+
+              return def.promise;
+            }]
+          }
         });
       //   .state('notifications', {
       //     url: '/notifications',

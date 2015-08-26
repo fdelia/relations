@@ -1,6 +1,7 @@
-<div class="box box-info">
+<div ng-controller="PersonCtrl">
+<div class="box box-info" ng-if="person">
 	<div class="box-header">
-		<div class="box-title">New relation</div>
+		<div class="box-title">Person "{{ person.name }}"</div>
 
 		<!-- <div class="pull-right box-tools">
 			 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -17,20 +18,21 @@
 	</div>
 
 	<div class="box-body">
-		<form class="form-inline" role="" ng-submit="addRelation(person, process, ressource)">
-	        <div class="form-group">
-	          <input type="person" class="form-control" placeholder="Person" ng-model="person">
-	          <input type="process" class="form-control" placeholder="processes" ng-model="process">
-	          <input type="ressource" class="form-control" placeholder="ressource" ng-model="ressource">
-	        </div>
-	        <button type="submit" class="btn btn-default">Add</button>
-	    </form>
+		
+		<ul class="list-group">
+			<li class="list-group-item">
+				Active since: {{ person.createdAt }}
+			</li>
+		</ul>
 	</div>
 </div>
+</div>
 
-<div class="box box-warning">
+
+
+<div class="box box-warning" ng-controller="PersonListCtrl">
 	<div class="box-header">
-		<div class="box-title">Relations</div>
+		<div class="box-title">Persons</div>
 
 		<!-- <div class="pull-right box-tools">
 			 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -47,12 +49,10 @@
 	</div>
 
 	<div class="box-body">
-		<ul>
-			<li ng-repeat="rel in relations">
-				<a ui-sref="person({id: rel.person.name})">{{ rel.person.name }}</a>
-				{{ rel.process.name }} 
-				{{ rel.ressource.name }} 
-				<small class="text-muted">{{ rel.createdAt }}</small>
+		<ul class="list-group simple-links-list">
+			<li ng-repeat="person in persons" class="list-group-item">
+				<a ui-sref="person({id: person.name})">{{ person.name }}</a>
+				<small class="text-muted">{{ timeSince(person.createdAt) }}</small>
 			</li>
 		</ul>
 	</div>

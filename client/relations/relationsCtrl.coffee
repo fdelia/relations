@@ -7,8 +7,8 @@
 
 
 class RelationsCtrl
-	constructor: (@$scope, @$meteor) ->
-		@$scope.addRelation = @addRelation
+	constructor: (@$scope, @$meteor, @RelationsApp) ->
+		@$scope.addRelation = @RelationsApp.addRelation
 
 		@$scope.relations = @getRelations()
 
@@ -67,4 +67,4 @@ class RelationsCtrl
 
 
 angular.module('app').controller 'RelationsCtrl', RelationsCtrl
-RelationsCtrl.$inject = ['$scope', '$meteor']
+RelationsCtrl.$inject = ['$scope', '$meteor', 'RelationsApp']
