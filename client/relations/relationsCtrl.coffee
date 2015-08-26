@@ -2,28 +2,39 @@
 # First look at coffeescript for myself!
 #
 
-# TODO make an two ctrls, one for showing and one for adding relations
+# TODO make two ctrls, one for showing and one for adding relations
+# one box = one controller
 
 
 class RelationsCtrl
 	constructor: (@$scope, @$meteor) ->
 		@$scope.addRelation = @addRelation
 
-		# TODO put this into a data service or resolve (route.js)
-		# fat arrow so that this (the class-this) is given over to the anonymous functions
-		# and @getRelations is the one defined in the class
-		$meteor.subscribe('Relations').then () =>
-			$meteor.subscribe('Persons').then () =>
-				$meteor.subscribe('Processes').then () =>
-					$meteor.subscribe('Ressources').then () =>
-						# console.log 'subscribed all'
-						# console.log Relations.find().fetch()
-						@$scope.relations = @getRelations()
+		@$scope.relations = @getRelations()
+
+		# set observers
+		observerCallback = (id, obj) =>
+			if ! initialization
+				@$scope.relations = @getRelations()
+
+		initialization = true
+		Relations.find().observeChanges({
+			added: observerCallback
+		})
+		initialization = false
+
+
+	
+		
 
 	
 	# TODO also into data service
 	getRelations: () ->
-		relations = Relations.find().fetch()
+		relations = Relations.find({}, {
+			sort: {
+				createdAt: -1
+			}
+		}).fetch()
 		
 		relations = relations.filter (relation) ->
 			relation.person = Persons.findOne({_id: relation.personId})
@@ -50,7 +61,8 @@ class RelationsCtrl
 				@$scope.person = ''
 				@$scope.process = ''
 				@$scope.ressource = ''
-				@$scope.relations = @getRelations()
+				# TODO observe Relations, not here (DB may loads slow)
+				# @$scope.relations = @getRelations()
 				@$scope.$apply()
 
 
