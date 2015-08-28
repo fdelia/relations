@@ -1,7 +1,7 @@
-<div ng-controller="PersonCtrl">
-<div class="box box-info" ng-if="person">
+<div ng-controller="RessourceCtrl">
+<div class="box box-info" ng-if="ressource">
 	<div class="box-header">
-		<div class="box-title">Person "{{ person.name }}"</div>
+		<div class="box-title">Ressource "{{ ressource.name }}"</div>
 
 		<!-- <div class="pull-right box-tools">
 			 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -21,7 +21,7 @@
 		
 		<ul class="list-group">
 			<li class="list-group-item">
-				Created: {{ timeSince(person.createdAt) }}
+				Created: {{ timeSince(ressource.createdAt) }}
 			</li>
 		</ul>
 	</div>
@@ -30,9 +30,9 @@
 
 
 
-<div class="box box-warning" ng-controller="PersonListCtrl">
+<div class="box box-warning" ng-controller="RessourceListCtrl">
 	<div class="box-header">
-		<div class="box-title">Persons</div>
+		<div class="box-title">Ressources</div>
 
 		<!-- <div class="pull-right box-tools">
 			 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -50,10 +50,10 @@
 
 	<div class="box-body">
 		<ul class="list-group simple-links-list">
-			<li ng-repeat="person in persons" class="list-group-item">
-				<a ui-sref="person({id: person.name})">{{ person.name }}</a>
-				<small class="text-muted">{{ timeSince(person.createdAt) }}</small>
-				<a class="pull-right text-muted" href="" ng-click="deleteElement('person', person._id)">x</a>
+			<li ng-repeat="ressource in ressources" class="list-group-item">
+				<a ui-sref="ressource({id: ressource.name})">{{ ressource.name }}</a>
+				<small class="text-muted">{{ timeSince(ressource.createdAt) }}</small>
+				<a class="pull-right text-muted" href="" ng-click="deleteElement('ressource', ressource._id)">x</a>
 			</li>
 		</ul>
 	</div>

@@ -55,6 +55,7 @@
 				{{ rel.process.name }} 
 				{{ rel.ressource.name }} 
 				<small class="text-muted">{{ timeSince(rel.createdAt) }}</small>
+				<a class="pull-right text-muted" href="" ng-click="deleteElement('relation', rel._id)">x</a>
 			</li>
 		</ul>
 	</div>

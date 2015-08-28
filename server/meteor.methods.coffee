@@ -46,6 +46,36 @@ RelationsApp = {
 		obj = Ressources.findOne({name: name})
 		if !obj then obj = @newRessource(name)
 		return obj
+
+	deleteElement: (type, id) ->
+		if !type or !id
+			return 'missing argument(s)'
+
+
+		# attention: all elements for a relation need to exist
+		# if element is deleted, then it's relation is deleted too
+		switch type
+			when 'relation'
+				return Relations.remove({_id: id})
+
+			when 'person'
+				rel = Relations.findOne({personId: id})
+				if rel then Relations.remove({_id: rel._id})
+				return Persons.remove({_id: id})
+
+			when 'process'
+				rel = Relations.findOne({processId: id})
+				if rel then Relations.remove({_id: rel._id})
+				return Processes.remove({_id: id})
+			
+			when 'ressource'
+				rel = Relations.findOne({ressourceId: id})
+				if rel then Relations.remove({_id: rel._id})
+				return Ressources.remove({_id: id})
+
+			else 
+				return 'illegal argument'
+
 }
 
 
@@ -63,4 +93,6 @@ Meteor.methods({
 		console.log obj
 
 		return obj
+
+	deleteElement: RelationsApp.deleteElement
 })

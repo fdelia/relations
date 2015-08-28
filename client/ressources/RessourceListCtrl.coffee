@@ -1,5 +1,5 @@
 
-class PersonListCtrl
+class RessourceListCtrl
 	constructor: (@$scope, @$meteor, @RelationsApp) ->
 		$scope.timeSince = RelationsApp.timeSince
 
@@ -8,7 +8,7 @@ class PersonListCtrl
 				.then( 
 						# ok
 					(res) => (
-						loadPersons()
+						loadRessources()
 					)
 						# error
 					(err) => (
@@ -20,14 +20,15 @@ class PersonListCtrl
 
 
 		# TODO transfer to service
-		loadPersons = () =>
-			@$scope.persons = Persons.find({}, {
+		loadRessources = () =>
+			$scope.ressources = Ressources.find({}, {
 				sort: {
 					name: 1
 				}
 			}).fetch()
 
-		loadPersons()
+		loadRessources()
 
-angular.module('app').controller 'PersonListCtrl', PersonListCtrl
-PersonListCtrl.$inject = ['$scope', '$meteor', 'RelationsApp']
+
+angular.module('app').controller 'RessourceListCtrl', RessourceListCtrl
+RessourceListCtrl.$inject = ['$scope', '$meteor', 'RelationsApp']

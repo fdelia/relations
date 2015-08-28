@@ -1,10 +1,12 @@
 class RelationsApp
-	constructor: (@$q) ->
+	constructor: (@$q, @$meteor) ->
 
 		return {
 			addRelation: @addRelation,
 			getRelations: @getRelations,
-			timeSince: @timeSince
+			timeSince: @timeSince,
+			subscribeAll: @subscribeAll
+			deleteElement: @deleteElement
 		}
 
 
@@ -83,12 +85,39 @@ class RelationsApp
 	    return interval + ' ' + intervalType;
 
 
+	subscribeAll: () =>
+		def = @$q.defer();
+		@$meteor.subscribe('Relations').then(() =>
+			@$meteor.subscribe('Persons').then(() =>
+				@$meteor.subscribe('Processes').then(() =>
+					@$meteor.subscribe('Ressources').then(() =>
+						def.resolve('ok');
+					)
+				)
+			)
+		)
+		return def.promise
+		
+	deleteElement: (type, id) =>
+		def = @$q.defer()
+
+		if ! type or ! id
+			def.reject('missing argument(s)')
+		else
+			Meteor.call('deleteElement', type, id, (err, res) =>
+				if err
+					def.reject(err)
+				else
+					def.resolve(res)
+			)
+
+		return def.promise
+	
 
 
 
 
-
-RelationsApp.$inject = ['$q']
+RelationsApp.$inject = ['$q', '$meteor']
 # needs to be a service, since services are invoked with "new" -> singleton 
 # else the class methods in the constructor aren't found (they are undefined then)
 angular.module('app').service 'RelationsApp', RelationsApp
