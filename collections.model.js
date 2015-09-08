@@ -7,3 +7,9 @@ Ressources = new Mongo.Collection('Ressources');
 Relations = new Mongo.Collection('Relations');
 
 // add model specifications here
+
+
+
+Meteor.startup(function() {
+	
+});
