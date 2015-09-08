@@ -1,2 +1,3 @@
 client/stylesheets/bootstrap.min.css linguist-vendored
 relations/client/stylesheets/AdminLTE.css linguist-vendored
+client/stylesheets/font-awesome.min.css linguist-vendored
